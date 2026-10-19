@@ -46,3 +46,10 @@ function render(list) {
 
 // 4) Draw everything once when the page loads.
 render(products);
+
+// 5) Every time the user types, filter the list and draw again.
+search.addEventListener("input", () => {
+  const text = search.value.trim().toLowerCase();
+  const matches = products.filter((p) => p.name.toLowerCase().includes(text));
+  render(matches);
+});
