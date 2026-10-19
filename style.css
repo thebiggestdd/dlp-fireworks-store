@@ -6,8 +6,12 @@ body {
   background: #38b6ff;
   color: white;
   font-family: "Montserrat", system-ui, sans-serif;
+  
 }
 
+body {
+  padding: 88px 24px 48px;
+}
 .brand {
   position: absolute;
   top: 24px;
