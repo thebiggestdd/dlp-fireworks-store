@@ -1,6 +1,6 @@
 // 1) Read our settings and create a connection ("client") to Supabase.
-const { https://yoavpgkfnqthpkobotzc.supabase.co, sb_publishable_QMp_HLDVyZsLm7Nv8yxGOw_TjdJGCxl, CURRENCY } = window.APP_CONFIG;
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const { SUPABASE_URL, SUPABASE_ANON_KEY, CURRENCY } = window.APP_CONFIG;
+const db = supabase.createClient(https://yoavpgkfnqthpkobotzc.supabase.co, sb_publishable_QMp_HLDVyZsLm7Nv8yxGOw_TjdJGCxlANON_KEY);
 
 const money = new Intl.NumberFormat(undefined, { style: "currency", currency: CURRENCY });
 
