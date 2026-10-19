@@ -11,20 +11,26 @@
 </head>
 <body>
   <span class="brand">DLP Fireworks Store</span>
-    <p style="text-align:center;margin-top:48px"><a href="admin.html" style="color:white;font-weight:600">Owner login</a></p>
+
   <main>
     <div class="bar">
-            <input id="search" type="search" placeholder="Search products..." />
+      <input id="search" type="search" placeholder="Search products..." />
+    </div>
+
+    <div class="filters">
+      <select id="category" aria-label="Filter by category" hidden></select>
     </div>
 
     <h1>See how each product works.<br />Tap a video to watch!</h1>
-            <section id="gallery" class="gallery"></section>
+
+    <section id="gallery" class="gallery"></section>
     <p id="empty" class="empty" hidden>No product matches your search.</p>
-    </section>
+
+    <p style="text-align:center;margin-top:48px"><a href="admin.html" style="color:white;font-weight:600">Owner login</a></p>
   </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-   <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
   <script src="youtube.js"></script>
   <script src="app.js"></script>
 </body>

@@ -150,3 +150,31 @@ h1 {
   display: grid; place-items: center; font-size: 1.6rem;
 }
 a.video-box:focus-visible { outline: 3px solid #0b4aa8; outline-offset: 3px; }
+
+/* Makes the hidden attribute always win over other display rules */
+[hidden] { display: none !important; }
+
+/* Category dropdown on the store page */
+.filters { display: flex; justify-content: center; }
+.filters select {
+  margin-top: 16px;
+  font: 600 1.1rem "Montserrat", sans-serif;
+  color: #0b4aa8; background: white;
+  border: 0; border-radius: 999px;
+  padding: 10px 22px; cursor: pointer;
+}
+.filters select:focus-visible { outline: 3px solid white; outline-offset: 2px; }
+
+/* Cover box shapes. Cards no longer stretch to match the tallest one in the row. */
+.gallery { align-items: start; }
+.video-box.wide { aspect-ratio: 16 / 9; }
+.video-box.vertical { aspect-ratio: 9 / 16; }
+
+/* Admin extras */
+.panel select {
+  width: 100%; padding: 10px 12px;
+  font: 500 1rem "Montserrat", sans-serif; color: #0b4aa8;
+  border: 2px solid #0b4aa8; border-radius: 10px; background: white;
+}
+.item-actions { display: flex; gap: 8px; }
+.item small { display: block; opacity: .8; }

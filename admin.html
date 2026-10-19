@@ -30,17 +30,32 @@
     <!-- Shown when logged in -->
     <div id="adminView" hidden>
       <section class="panel">
-        <h2>Add a product</h2>
+        <h2 id="formTitle">Add a product</h2>
         <form id="addForm">
           <label for="pname">Product name</label>
           <input id="pname" type="text" maxlength="80" required />
+
           <label for="pprice">Price (optional)</label>
           <input id="pprice" type="number" min="0" step="0.01" />
+
           <label for="pdesc">Short description (optional)</label>
           <textarea id="pdesc" maxlength="300"></textarea>
+
+          <label for="pcategory">Category (optional, like Sparklers or Rockets)</label>
+          <input id="pcategory" type="text" maxlength="30" list="categoryList" />
+          <datalist id="categoryList"></datalist>
+
+          <label for="pshape">Video shape</label>
+          <select id="pshape">
+            <option value="wide">Wide (shot sideways)</option>
+            <option value="vertical">Vertical (shot upright on a phone)</option>
+          </select>
+
           <label for="pvideo">Video link (optional)</label>
           <input id="pvideo" type="url" placeholder="https://youtu.be/..." />
-          <button class="pill" type="submit">Add product</button>
+
+          <button id="saveBtn" class="pill" type="submit">Add product</button>
+          <button id="cancelBtn" class="pill light" type="button" hidden>Cancel edit</button>
           <button id="logoutBtn" class="pill light" type="button">Log out</button>
         </form>
       </section>
