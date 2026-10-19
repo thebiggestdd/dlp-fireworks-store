@@ -18,7 +18,7 @@ async function showCorrectView() {
 }
 
 $("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault(); // stop the browser from reloading the page
+  e.preventDefault();
   const { error } = await db.auth.signInWithPassword({
     email: $("email").value.trim(),
     password: $("password").value,
@@ -41,12 +41,7 @@ $("addForm").addEventListener("submit", async (e) => {
     name: $("pname").value.trim(),
     price: priceRaw === "" ? null : Number(priceRaw),
     description: $("pdesc").value.trim() || null,
-  });
-    const { error } = await db.from("products").insert({
-    name: $("pname").value.trim(),
-    price: priceRaw === "" ? null : Number(priceRaw),
-    description: $("pdesc").value.trim() || null,
-    video_url: $("pvideo").value.trim() || null,   // <-- new line
+    video_url: $("pvideo").value.trim() || null,
   });
   if (error) return say(`Couldn't add: ${error.message}`, true);
   $("addForm").reset();
