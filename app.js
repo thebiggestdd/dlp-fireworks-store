@@ -4,6 +4,7 @@ const products = [
   { name: "Sparkler Pack", price: 50, description: "Safe handheld sparklers." },
   { name: "Fountain Cone", price: 120, description: "Sprays colorful sparks." },
   { name: "Rocket Set", price: 250, description: "Launches high with a bang." },
+  { name: "Maybe It's You", price: 250, description: "Launches with a banger."}
 ];
 
 const CURRENCY = "PHP"; // change to USD, EUR, etc.
