@@ -22,9 +22,37 @@ function render(list) {
     const card = document.createElement("article");
     card.className = "card";
 
-    const box = document.createElement("div");
+        // Only accept normal web links (blocks anything sneaky like "javascript:").
+    const hasLink = p.video_url && /^https?:\/\//i.test(p.video_url);
+
+    // If there's a link, the box becomes a clickable <a>; otherwise a plain <div>.
+    const box = document.createElement(hasLink ? "a" : "div");
     box.className = "video-box";
-    box.textContent = "Video goes here";
+
+    if (hasLink) {
+      box.href = p.video_url;
+      box.target = "_blank";                    // open in a new tab
+      box.rel = "noopener noreferrer";
+      box.setAttribute("aria-label", `Watch the video for ${p.name}`);
+
+      const id = getYouTubeId(p.video_url);
+      if (id) {
+        const img = document.createElement("img");
+        img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; // YouTube's automatic cover
+        img.alt = `Cover of the ${p.name} video`;
+        img.loading = "lazy";
+        box.append(img);
+      } else {
+        box.textContent = "Watch video";        // not a YouTube link, so no automatic cover
+      }
+
+      const play = document.createElement("span");
+      play.className = "play";
+      play.textContent = "▶";
+      box.append(play);
+    } else {
+      box.textContent = "No video yet";
+    }
 
     const name = document.createElement("p");
     name.className = "name";

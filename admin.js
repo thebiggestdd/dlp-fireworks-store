@@ -42,6 +42,12 @@ $("addForm").addEventListener("submit", async (e) => {
     price: priceRaw === "" ? null : Number(priceRaw),
     description: $("pdesc").value.trim() || null,
   });
+    const { error } = await db.from("products").insert({
+    name: $("pname").value.trim(),
+    price: priceRaw === "" ? null : Number(priceRaw),
+    description: $("pdesc").value.trim() || null,
+    video_url: $("pvideo").value.trim() || null,   // <-- new line
+  });
   if (error) return say(`Couldn't add: ${error.message}`, true);
   $("addForm").reset();
   say("Product added!");
