@@ -1,13 +1,7 @@
-// 1) The data. Each product is an object with a name and a price.
-//    In Part 3 this list will come from Supabase instead.
-const products = [
-  { name: "Sparkler Pack", price: 50, description: "Safe handheld sparklers." },
-  { name: "Fountain Cone", price: 120, description: "Sprays colorful sparks." },
-  { name: "Rocket Set", price: 250, description: "Launches high with a bang." },
-  { name: "Maybe It's You", price: 250, description: "Launches with a banger."}
-];
+// 1) Read our settings and create a connection ("client") to Supabase.
+const { SUPABASE_URL, SUPABASE_ANON_KEY, CURRENCY } = window.APP_CONFIG;
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const CURRENCY = "PHP"; // change to USD, EUR, etc.
 const money = new Intl.NumberFormat(undefined, { style: "currency", currency: CURRENCY });
 
 // 2) Find the places on the page we want to change.
@@ -15,10 +9,14 @@ const gallery = document.getElementById("gallery");
 const empty = document.getElementById("empty");
 const search = document.getElementById("search");
 
-// 3) A function that draws cards for a list of products.
+// 3) Start with an empty list. It gets filled after we ask the database.
+let products = [];
+
+// 4) Draw cards for a list of products (same idea as before).
 function render(list) {
-  gallery.replaceChildren(); // remove the old cards first
+  gallery.replaceChildren();
   empty.hidden = list.length > 0;
+  empty.textContent = products.length ? "No product matches your search." : "No products yet.";
 
   for (const p of list) {
     const card = document.createElement("article");
@@ -31,26 +29,47 @@ function render(list) {
     const name = document.createElement("p");
     name.className = "name";
     name.textContent = p.name;
+    card.append(box, name);
 
-    const price = document.createElement("p");
-    price.className = "price";
-    price.textContent = money.format(p.price);
+    if (p.price != null) {
+      const price = document.createElement("p");
+      price.className = "price";
+      price.textContent = money.format(p.price);
+      card.append(price);
+    }
 
-    const desc = document.createElement("p");
-    desc.className = "desc";
-    desc.textContent = p.description;
+    if (p.description) {
+      const desc = document.createElement("p");
+      desc.className = "desc";
+      desc.textContent = p.description;
+      card.append(desc);
+    }
 
-    card.append(box, name, price, desc);
     gallery.append(card);
   }
 }
 
-// 4) Draw everything once when the page loads.
-render(products);
+// 5) Ask Supabase for every row in the products table, newest first.
+async function loadProducts() {
+  const { data, error } = await db
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-// 5) Every time the user types, filter the list and draw again.
+  if (error) {
+    empty.hidden = false;
+    empty.textContent = `Couldn't load products: ${error.message}`;
+    return;
+  }
+
+  products = data;
+  render(products);
+}
+
+// 6) Search, same as before.
 search.addEventListener("input", () => {
   const text = search.value.trim().toLowerCase();
-  const matches = products.filter((p) => p.name.toLowerCase().includes(text));
-  render(matches);
+  render(products.filter((p) => p.name.toLowerCase().includes(text)));
 });
+
+loadProducts();
