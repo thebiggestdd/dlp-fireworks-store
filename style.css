@@ -168,7 +168,7 @@ a.video-box:focus-visible { outline: 3px solid #0b4aa8; outline-offset: 3px; }
 /* Cover box shapes. Cards no longer stretch to match the tallest one in the row. */
 .gallery { align-items: start; }
 .video-box.wide { aspect-ratio: 16 / 9; }
-.video-box.vertical { aspect-ratio: 9 / 16; }
+.video-box.vertical { aspect-ratio: 3 / 4; }
 
 /* Admin extras */
 .panel select {
