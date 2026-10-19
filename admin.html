@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Owner login – DLP Fireworks Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <span class="brand">DLP Fireworks Store</span>
+  <main>
+    <p id="message" class="message" role="status"></p>
+
+    <!-- Shown when logged out -->
+    <section id="loginView" class="panel">
+      <h2>Owner login</h2>
+      <form id="loginForm">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required />
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required />
+        <button class="pill" type="submit">Log in</button>
+      </form>
+    </section>
+
+    <!-- Shown when logged in -->
+    <div id="adminView" hidden>
+      <section class="panel">
+        <h2>Add a product</h2>
+        <form id="addForm">
+          <label for="pname">Product name</label>
+          <input id="pname" type="text" maxlength="80" required />
+          <label for="pprice">Price (optional)</label>
+          <input id="pprice" type="number" min="0" step="0.01" />
+          <label for="pdesc">Short description (optional)</label>
+          <textarea id="pdesc" maxlength="300"></textarea>
+          <button class="pill" type="submit">Add product</button>
+          <button id="logoutBtn" class="pill light" type="button">Log out</button>
+        </form>
+      </section>
+
+      <h2 class="list-title">Your products</h2>
+      <section id="list" class="list"></section>
+    </div>
+
+    <p class="footer"><a href="index.html">Back to the store</a></p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
